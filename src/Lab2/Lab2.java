@@ -21,7 +21,7 @@ public class Lab2 {
             hyper[i] = HyperGeometric.staticNextInt(N, M, n);
             sample[i] = distribution.sample();
         }
-        System.out.println("P-value for conqruent: " + new KolmogorovSmirnovTest().kolmogorovSmirnovTest(sample, hyper));
+        System.out.println("P-value for hyper geometric: " + new KolmogorovSmirnovTest().kolmogorovSmirnovTest(sample, hyper));
     }
 
 }
