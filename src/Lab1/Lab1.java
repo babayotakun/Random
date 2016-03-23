@@ -2,6 +2,7 @@ package Lab1;
 
 import java.util.Arrays;
 import java.util.Random;
+import org.apache.commons.math3.distribution.UniformRealDistribution;
 import org.apache.commons.math3.stat.inference.ChiSquareTest;
 import org.apache.commons.math3.stat.inference.KolmogorovSmirnovTest;
 
@@ -19,7 +20,6 @@ public class Lab1 {
 
 
     public static void main(String[] args) {
-        double[] expected = new double[SAMPLE_SIZE];
         double[] conqruentDouble = new double[SAMPLE_SIZE];
         double[] macLarenDouble = new double[SAMPLE_SIZE];
         long[] conqruent = new long[SAMPLE_SIZE];
@@ -27,21 +27,22 @@ public class Lab1 {
         int mod = (int) A;
         initV(mod);
         for (int i = 0; i < SAMPLE_SIZE; i++) {
-            expected[i] = generateExpected(mod);
             conqruent[i] = generateCongruential(mod);
             conqruentDouble[i] = conqruent[i];
             macLaren[i] = generateMacLaren(mod);
             macLarenDouble[i] = macLaren[i];
         }
-        System.out.println("*************** CHI-SQUARE ***************");
+        System.out.println("*************** Chi-Square ***************");
         System.out.println("P-value for conqruent: " +
             new ChiSquareTest().chiSquareTest(theoreticalFrequencies(SAMPLE_SIZE, mod), frequencies(conqruent, mod)));
         System.out.println("P-value for MacLaren: " +
             new ChiSquareTest().chiSquareTest(theoreticalFrequencies(SAMPLE_SIZE, mod), frequencies(macLaren, mod)));
-
-        System.out.println("*************** Kolmogorov - Smirnov ***************");
-        System.out.println("P-value for conqruent: " + new KolmogorovSmirnovTest().kolmogorovSmirnovTest(expected, conqruentDouble));
-        System.out.println("P-value for MacLaren: " + new KolmogorovSmirnovTest().kolmogorovSmirnovTest(expected, macLarenDouble));
+        System.out.println();
+        System.out.println("*************** Kolmogorov - Smirnov *****");
+        System.out.println("P-value for conqruent: " +
+            new KolmogorovSmirnovTest().kolmogorovSmirnovTest(new UniformRealDistribution(1, mod), conqruentDouble));
+        System.out.println("P-value for MacLaren: " +
+            new KolmogorovSmirnovTest().kolmogorovSmirnovTest(new UniformRealDistribution(1, mod), macLarenDouble));
 
     }
 
