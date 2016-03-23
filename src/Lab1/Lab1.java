@@ -24,7 +24,7 @@ public class Lab1 {
         double[] macLarenDouble = new double[SAMPLE_SIZE];
         long[] conqruent = new long[SAMPLE_SIZE];
         long[] macLaren = new long[SAMPLE_SIZE];
-        int mod = (int) A;
+        int mod = (int) M;
         initV(mod);
         for (int i = 0; i < SAMPLE_SIZE; i++) {
             conqruent[i] = generateCongruential(mod);

@@ -16,10 +16,11 @@ public class Lab2 {
     public static void main(String[] args) {
         double[] hyper = new double[SAMPLE_SIZE];
         double[] sample = new double[SAMPLE_SIZE];
-        HypergeometricDistribution distribution = new HypergeometricDistribution(N, M, n);
+        HypergeometricDistribution standard = new HypergeometricDistribution(N, M, n);
+        MyHyperGeometric my = new MyHyperGeometric();
         for (int i = 0; i < SAMPLE_SIZE; i++) {
-            hyper[i] = HyperGeometric.staticNextInt(N, M, n);
-            sample[i] = distribution.sample();
+            hyper[i] = my.getNext(N, M, n);
+            sample[i] = standard.sample();
         }
         System.out.println("P-value for hyper geometric: " + new KolmogorovSmirnovTest().kolmogorovSmirnovTest(sample, hyper));
     }
